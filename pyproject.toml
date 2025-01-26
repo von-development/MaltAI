@@ -1,0 +1,81 @@
+[project]
+name = "maltai"
+version = "0.1.0"
+description = "A AI assistant that can be controlled with voice"
+authors = [
+    {name = "von-development",email = "vondevelopment@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "langchain (>=0.3.15,<0.4.0)",
+    "langchain-openai (>=0.3.2,<0.4.0)",
+    "langgraph (>=0.2.67,<0.3.0)",
+    "langgraph-sdk (>=0.1.51,<0.2.0)",
+    "python-dotenv (>=1.0.1,<2.0.0)",
+    "sounddevice (>=0.5.1,<0.6.0)",
+    "scipy (>=1.15.1,<2.0.0)",
+    "elevenlabs (>=1.50.5,<2.0.0)",
+
+
+    "langsmith (>=0.1.0,<0.2.0)",
+
+
+    "trustcall (>=0.0.28,<0.0.29)"
+]
+
+[tool.setuptools]
+packages = ["maltai_agent"]
+[tool.setuptools.package-dir]
+"maltai_agent" = "src/maltai_agent"
+"langgraph.templates.maltai_agent" = "src/maltai_agent"
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
+
+[tool.ruff]
+lint.select = [
+    "E",    # pycodestyle
+    "F",    # pyflakes
+    "I",    # isort
+    "D",    # pydocstyle
+    "D401", # First line should be in imperative mood
+    "T201",
+    "UP",
+]
+lint.ignore = ["UP006", "UP007", "UP035", "D417", "E501"]
+include = ["*.py", "*.pyi", "*.ipynb"]
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["D", "UP"]
+"ntbk/*" = ["D", "UP", "T201"]
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.poetry]
+name = "maltai"
+version = "0.1.0"
+description = "A AI assistant that can be controlled with voice"
+authors = ["Your Name <your.email@example.com>"]
+packages = [
+    { include = "maltai_agent", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+langchain = ">=0.3.15"
+langchain-openai = ">=0.3.2"
+langgraph = ">=0.2.67"
+python-dotenv = ">=1.0.1"
+pytest = "^7.0"
+pytest-asyncio = "^0.23.0"
+langsmith = "^0.1.0"
+sounddevice = "^0.5.1"
+scipy = "^1.15.1"
+elevenlabs = "^1.50.5"
+openai = "^1.12.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
