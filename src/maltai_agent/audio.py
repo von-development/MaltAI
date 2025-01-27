@@ -10,9 +10,10 @@ import sounddevice as sd
 from elevenlabs import play, VoiceSettings
 from elevenlabs.client import ElevenLabs
 from langchain_core.messages import HumanMessage
-from scipy.io.wavfile import write
+from scipy.io.wavfile import write, read
 from openai import OpenAI
 from dotenv import load_dotenv
+import asyncio
 
 load_dotenv()
 
@@ -107,4 +108,27 @@ class AudioProcessor:
         )
         
         # Play audio response
-        play(audio) 
+        play(audio)
+
+async def process_audio(audio_data: bytes) -> str:
+    """Process audio data and return transcription."""
+    # Convert bytes to wav file in memory
+    audio_io = io.BytesIO(audio_data)
+    
+    try:
+        # Create a temporary file for OpenAI API
+        with open("temp_audio.wav", "wb") as f:
+            f.write(audio_data)
+        
+        # Transcribe using OpenAI Whisper
+        with open("temp_audio.wav", "rb") as audio_file:
+            transcript = openai_client.audio.transcriptions.create(
+                model="whisper-1", 
+                file=audio_file,
+                response_format="text"
+            )
+        
+        return transcript
+    except Exception as e:
+        print(f"Error processing audio: {e}")
+        raise 

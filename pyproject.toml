@@ -21,7 +21,10 @@ dependencies = [
     "langsmith (>=0.1.0,<0.2.0)",
 
 
-    "trustcall (>=0.0.28,<0.0.29)"
+    "trustcall (>=0.0.28,<0.0.29)",
+
+
+    "fastapi (>=0.115.7,<0.116.0)"
 ]
 
 [tool.setuptools]
@@ -57,7 +60,8 @@ version = "0.1.0"
 description = "A AI assistant that can be controlled with voice"
 authors = ["Your Name <your.email@example.com>"]
 packages = [
-    { include = "maltai_agent", from = "src" }
+    { include = "maltai_agent", from = "src" },
+    { include = "backend" }
 ]
 
 [tool.poetry.dependencies]
